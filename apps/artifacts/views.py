@@ -11,3 +11,6 @@ class ProjectArtifactViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return ProjectArtifact.objects.filter(project__owner=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(uploaded_by=self.request.user)
